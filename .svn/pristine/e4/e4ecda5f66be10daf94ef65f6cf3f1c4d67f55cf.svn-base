@@ -1,0 +1,9 @@
+<div id="nav_bar" class="nav_bar">
+
+    <ul>
+        <li> <a href="/accounts/profile/">My Profile</a></li>
+        <li> <a href="/accounts/hospital_referrals/">Pending Referrals</a></li>
+        <li> <a href="/accounts/scheduled_referrals/">Scheduled Referrals</a></li>
+    </ul>
+
+</div>

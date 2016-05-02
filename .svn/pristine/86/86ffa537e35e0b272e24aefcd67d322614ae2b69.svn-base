@@ -1,0 +1,73 @@
+{% extends 'userPage.html' %}
+
+{% block head %}
+  {% load staticfiles %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/latest/themes/base/jquery-ui.css" media="all" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+</script>
+
+<!-- This is a modern and creative business template with a vivid and warm color scheme.
+The template was created with HTML, CSS and CSS3, using Gimp and gedit.
+Some photos were used from http://www.freedigitalphotos.net/ .
+
+Designed by Ioana Condor
+http://behindtheovermind.wordpress.com/
+-->
+
+    <!-- Main theme css -->
+ <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+    <style type="text/css">
+
+    </style>
+<title> Pending referrals</title>
+{% endblock %}
+
+{% load staticfiles %}
+
+
+
+{% block userContent %}
+     <h4 > Current Referrals</h4> <hr/>
+
+        {% if referrals|length >= 1 %}
+            <table class="table_data">
+            <tr>
+                <th>Hospital </th>
+
+                <th>Referring Doctor</th>
+                <th>Referral date</th>
+            </tr>
+             {% for ref in referrals %}
+               <tr>
+               <td>
+                   <a href="/accounts/patient_ref_details/{{ ref.pk }}/">
+                {{ ref.specializedFacility.name }}<br/>
+                </a>
+               </td>
+               <td>
+                <em>{{ ref.doctorAppointment.get_doctor }}</em>
+               </td>
+               <td>
+                {{ ref.doctorAppointment.get_date }}
+
+               </td>
+               </tr>
+            {% endfor %}
+            </table>
+    {% else %}
+        <p> You do not have any pending referrals currently</p>
+
+    {% endif %}
+
+
+
+
+
+{% endblock %}
+

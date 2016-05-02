@@ -1,0 +1,123 @@
+{% extends 'forms_base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+
+    Register a Surgery
+ {% endblock %}
+{% block page_description %}
+    <div id="page_description">
+            <div id="page_description_content">
+                        <p class="two_parts_title">Register a surgery</p>
+                        <p class="description">
+                            Creates a portal for your surgery for where you can use the services of Surgeries Online
+                        </p>
+                        <ul >
+                            <li class="description" > Enter details of surgery i.e. name, address and registration number (assumes that the surgery is registered) </li>
+                            <li class="description"> Enter admin account details  for surgery administrator</li>
+                        </ul>
+            </div>
+        </div>
+    <ul>
+
+    </ul>
+{% endblock %}
+
+
+ {% block form_part%}
+
+
+
+
+
+            <form action="/register/register_surgery/" method="post">
+
+            {% if form.errors %}
+                <p style="color: red;">
+                    Please correct the error{{ form.errors|pluralize }} below.
+                </p>
+                    {% if form.message.errors %}
+                    <ul>
+                    {% for error in form.message.errors %}
+                        <li><strong>{{ error }}</strong></li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endif %}
+
+            <fieldset>
+                <legend>Surgery details:</legend>
+                <div class="field">
+                    {{ form.surgeryName.errors }}
+                    <label for="id_subject">Surgery name:</label>
+                    {{ form.surgeryName }}
+
+                </div>
+                <div class="field">
+                    {{ form.surgeryAddress.errors }}
+                    <label for="id_email">Surgery address:</label>
+                    {{ form.surgeryAddress }}
+
+                </div>
+                <div class="field">
+                    {{ form.regNo.errors }}
+                    <label for="id_message">Registration number:</label>
+                    {{ form.regNo }}
+
+                </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Surgery Administrator </legend>
+
+                    <div class="field">
+                        {{ form.adminUsername.errors }}
+                        <label for="id_subject">Admin username:</label>
+                        {{ form.adminUsername }}
+
+                    </div>
+
+                    <div class="field">
+                        {{ form.adminPassword.errors }}
+                        <label for="id_subject">Admin Password:</label>
+                        {{ form.adminPassword }}
+
+                    </div>
+
+                    <div class="field">
+                        {{ form.adminEmail.errors }}
+                        <label for="id_subject">Email:</label>
+                        {{ form.adminEmail }}
+
+                    </div>
+
+                    <div class="field">
+                        {{ form.adminStaffId.errors }}
+                        <label for="id_subject">Admin staffNo:</label>
+                        {{ form.adminStaffId }}
+
+                    </div>
+
+                    <div class="field">
+                        {{ form.adminFirstname.errors }}
+                        <label for="id_subject">First name (Optional):</label>
+                        {{ form.adminFirstname }}
+
+                    </div>
+
+                    <div class="field">
+                        {{ form.adminLastname.errors }}
+                        <label for="id_subject">Last name (Optional):</label>
+                        {{ form.adminLastname }}
+
+                    </div>
+
+                </fieldset>
+
+
+                 {% csrf_token %}
+                <input type="submit"  value="Submit">
+            </form>
+
+            {% endblock %}
+

@@ -1,0 +1,91 @@
+{% extends 'hospital/hospitalPage.html' %}
+
+{% block head %}
+  {% load staticfiles %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/latest/themes/base/jquery-ui.css" media="all" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('#id_fixedDate').datepicker({ minDate:0,
+                                        dateFormat: "dd/mm/yy"});
+
+    });
+</script>
+
+<script type="text/javascript">
+    $(function() {
+        $('#id_fixedTime').timepicker({ });
+
+    });
+</script>
+
+<!-- This is a modern and creative business template with a vivid and warm color scheme.
+The template was created with HTML, CSS and CSS3, using Gimp and gedit.
+Some photos were used from http://www.freedigitalphotos.net/ .
+
+Designed by Ioana Condor
+http://behindtheovermind.wordpress.com/
+-->
+
+    <!-- Main theme css -->
+ <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+    <style type="text/css">
+
+    </style>
+<title> Pending referrals</title>
+{% endblock %}
+
+{% load staticfiles %}
+
+
+{% block userContent %}
+     <h4 >Fix referral appointment</h4> <hr/>
+
+       <div>
+     <form action="/accounts/save_referral_time/" method="post">
+
+          {% if errors|length >= 1  %}
+              <ul>
+              {% for error in errors %}
+                 <li>{{error }}</li>
+              {% endfor %}
+              </ul>
+         {% endif %}
+     <label for="date"> Fix date:</label>
+
+        <input id="id_fixedDate" type="date" name="fixedDate">
+
+     <select name="fixedTime" id="id_fixedTime">
+         <option value=""> ----</option>
+         <option value="8"> 8:00am</option>
+         <option value="8,30 ">8:30am </option>
+         <option value="9 "> 9:00am</option>
+         <option value="10"> 10:00am</option>
+         <option value="10,30 "> 10:30am</option>
+         <option value="11"> 11:00am</option>
+         <option value="11,30 "> 11:30am</option>
+         <option value="12"> 12:00pm</option>
+         <option value="12,30 "> 12:30pm</option>
+         <option value="13"> 1:00pm</option>
+         <option value="13,30 "> 1:30pm</option>
+         <option value="14"> 2:00pm</option>
+         <option value="14,30 "> 2:30pm</option>
+         <option value="15"> 3:00pm</option>
+         <option value="15,30 "> 3:30pm</option>
+         <option value="16"> 4:00pm</option>
+         <option value="16,30 "> 4:30pm</option>
+         <option value="17"> 5:00pm</option>
+         <option value="17,30 "> 5:30pm</option>
+     </select>
+
+
+                 {% csrf_token %}
+                <input type="submit"  value="Submit">
+            </form></div>
+
+
+
+
+{% endblock %}

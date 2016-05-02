@@ -1,0 +1,37 @@
+{% extends 'userPage.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Surgerie's pharmacy
+ {% endblock %}
+
+{% block userContent %}
+
+    <h4 > Pharmacy(s) page </h4> <hr/>
+
+
+
+    {% if not pharm|length >= 1  %}
+        This surgery currently has no pahrmacy added
+
+        <div class="user_click">
+
+        <p> <a href="/admin/add_pharmacy/"> configure new pharmacy</a> </p>
+        </div>
+        {% else %}
+            <div id="pharm-details"  >
+         {% for ph in pharm %}
+
+            <p>department name: {{ ph.deptName }} </p>
+
+             <p>phone Number: {{ ph.phoneNo }}</p>
+             <p> username: {{ ph.userProfile.get_username }}</p>
+             <p> email: {{ ph.userProfile.get_email }}</p>
+             <a href="/admin/delete_pharm/{{ ph.pk }}/"><u>click here to remove</u></a>
+             </tr>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+{% block head %}
+  {% load staticfiles %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- This is a modern and creative business template with a vivid and warm color scheme.
+The template was created with HTML, CSS and CSS3, using Gimp and gedit.
+Some photos were used from http://www.freedigitalphotos.net/ .
+
+Designed by Ioana Condor
+http://behindtheovermind.wordpress.com/
+-->
+
+ <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+<title>{% block title %}User page{% endblock %}</title>
+{% endblock %}
+</head>
+<body id="body">
+<div id="top">
+	<div id="top_content">
+		<div id="logo">
+			<h1>Surgeries Online</h1>
+			<h4><sup>A system for local GPs</sup></h4>
+		</div>
+	</div>
+</div>
+
+{% block top_bar %}
+<div class="menu">
+	<div class="menu_content">
+		<ul class="menulist">
+            <div class="top_item">Hello {{  request.user.username }}, </div>
+             <div class="top_item" style="margin-left:150px; font-size: large"> <b>{{ request.session.userSurgery }}</b>  </div>
+
+
+            <li class="menu_item" style="margin-left:230px;" ><a href="/accounts/my_account/" class="top">My account</a></li>
+			<li class="menu_item"  ><u><a href="/accounts/logout/" class="top">Logout</a></u></li>
+
+
+		</ul>
+	</div>
+</div>
+{% endblock %}
+
+{% block midpage %}
+
+    {% block page_description %}
+
+     {% endblock %}
+
+    {% block two_parts %}
+        <div id="two_parts">
+            <div id="two_parts_content">
+
+
+
+        <!--
+        Choose Navigation bar types to included in user page
+        -->
+        {% if request.session.usertype == 'surgeryAdmin' %}
+            {% include 'include/navBar/admin_nav_bar.html' %}
+        {% elif  request.session.usertype == 'patient'%}
+                {% include 'include/navBar/patient_nav_bar.html' %}
+        {% elif request.session.usertype == 'pharmacy' %}
+                {% include 'include/navBar/pharm_nav_bar.html' %}
+        {% elif request.session.usertype == 'nurse' %}
+                {% include 'include/navBar/nurse_nav_bar.html' %}
+        {% else %}
+             {% include 'include/navBar/doctor_nav_bar.html' %}
+        {% endif %}
+
+            <!-- other contents of the inner profile -->
+        <div id="main_content"> {% block userContent %}
+            <h4 > My Account</h4> <hr/>
+
+             <div id="user_details" class="profile_div">
+             <p > User details</p>
+             Name: {{ profile.fullname }}
+             <br/>
+
+             Username:{{ request.user.username }}  <br/>
+
+             Email: {{ request.user.email }} <br/>
+
+             Profile Type: {{ request.session.usertype }}
+
+             {% if not request.session.usertype == 'surgeryAdmin' %}
+             <br/>Phone No: {{ surgeryUser.phoneNo }}
+             {% endif %}
+
+             {% if request.session.usertype == 'patient' %}
+                 <br/> NHS number: {{ surgeryUser.NHS_No }}
+                 <br/> Address:{{ surgeryUser.address }}
+
+                 {% elif  request.session.usertype == 'surgeryAdmin'%}
+                 <br/> Staff Id:
+                 {{ surgeryUser.staffId }}
+                 {% elif not request.session.usertype == 'pharmacy' %}
+
+                 <br/>Staff Id:
+                 {{ surgeryUser.staffNo }}
+                 <br/> Address:{{ surgeryUser.address }}
+             {% endif %}
+             </div>
+
+             <div  id="settings_div" class="profile_div">
+             <p> Account Settings</p>
+             <ul>
+                 <li><a href="/accounts/change_password/"> change password</a></li>
+                  <li><a href="/accounts/change_email/"> change email</a></li>
+                 {% if not request.session.usertype == 'surgeryAdmin' %}
+                    <li><a href="/accounts/change_phoneNo/"> change phone No.</a></li>
+                 {% endif %}
+             </ul>
+             </div>
+            <div class="hr"><hr /></div>
+
+             <div id= "surgery_details" class="profile_div" >
+             <p> Surgery details</p>
+             Surgery name:{{ profile.surgery.name }}<br/>
+             Surgery Address: {{ profile.surgery.address }}<br/>
+             Reg No: {{ profile.surgery.regNo }}
+
+             </div>
+             <div id= "notifications" class="profile_div" >
+             <p> Messages and notifications</p>
+
+            No new messages or notifications currently
+
+
+             </div>
+
+             {% endblock %}</div>
+         </div>
+
+
+
+    </div>
+
+    {% endblock %}
+
+
+{% endblock %}
+
+<div id="bottom">
+	<div id="bottom_content">
+		<div class="menu_bottom_list">
+				<ul class="bottom_item">
+					<li><a href="" class="bottom_link" style="line-height:300%;margin-left:-20px;color:#e9727a;">Products</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Our Products</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Features</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Sample</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Export</a></li>
+				</ul>
+		</div>
+		<div class="menu_bottom_list">
+				<ul class="bottom_item">
+					<li><a href="" class="bottom_link" style="line-height:300%;margin-left:-20px;color:#e9727a;">Solutions</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Innovative Solutions</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >New Options</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Build</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Impact</a></li>
+				</ul>
+		</div>
+		<div class="menu_bottom_list">
+				<ul class="bottom_item">
+					<li><a href="" class="bottom_link" style="line-height:300%;margin-left:-20px;color:#e9727a;">Company</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >About</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Press Center</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Privacy Policy</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Terms and Conditions</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Careers</a></li>
+				</ul>
+		</div>
+
+		<div class="menu_bottom_list">
+				<ul class="bottom_item">
+					<li><a href="" class="bottom_link" style="line-height:300%;margin-left:-20px;color:#e9727a;">Support</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Your Questions</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Forum</a></li>
+					<li><img src="{% static "img/arrow.png" %}" class="arrow" alt="" /><a href="" class="bottom_link" >Updates</a></li>
+
+				</ul>
+		</div>
+		<div id="copyright">&copy; 2011 Ioana Condor
+		</div>
+	</div>

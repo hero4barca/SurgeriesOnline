@@ -1,0 +1,37 @@
+{% extends 'userPage.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Change address
+ {% endblock %}
+
+{% block userContent %}
+
+    <h4 > Change Your address </h4> <hr/>
+
+
+<form action="" method="post">
+
+ {% if form.errors|length >= 1 %}
+     <div class="errors">
+     please fix the following error{{ form.errors|pluralize }}
+     <ul>
+      {% for error in form.errors  %}
+         <li> {{ error }}</li>
+     {% endfor %}
+     </ul>
+     </div>
+
+  {% endif %}
+<p>
+    <label for="newAddress">Enter new address:</label>
+    {{ form.newAddress }}</p>
+
+
+{% csrf_token %}
+<input type="submit" value="change Address">
+        </form>
+
+
+
+{% endblock %}

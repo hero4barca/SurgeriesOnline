@@ -1,0 +1,126 @@
+{% extends 'forms_base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+
+    Register with your surgery
+ {% endblock %}
+{% block page_description %}
+    <div id="page_description">
+            <div id="page_description_content">
+                        <p class="two_parts_title">New Patient register - with surgery</p>
+                        <p class="description">
+                            Creates an account for patient linked with a surgery
+                        </p>
+                        <ul >
+                            <li class="description" > Choose your surgery </li>
+                            <li class="description"> Enter account login details - username, password</li>
+                            <li class="description"> Enter patient details - NHS number,  contact detais, address</li>
+                        </ul>
+            </div>
+        </div>
+    <ul>
+{% endblock %}
+
+
+ {% block form_part%}
+
+
+
+
+
+            <form action="/register/register_patient/" method="post">
+
+            {% if form.errors %}
+                <p style="color: red;">
+                    Please correct the error{{ form.errors|pluralize }} below.
+                </p>
+                    {% if form.message.errors %}
+
+                {% endif %}
+            {% endif %}
+
+
+            <fieldset>
+                <legend>Choose your Surgery </legend>
+                <div class="field">
+                    {{ form.surgery.errors }}
+                    <label for="id_subject">Surgery name:</label>
+                    {{ form.surgery }}
+
+                </div>
+
+                </fieldset>
+
+                <fieldset>
+                    <legend>Login details</legend>
+
+                    <div class="field">
+                        {{ form.username.errors }}
+                        <label for="id_subject">Username:</label>
+                        {{ form.username }}
+
+                    </div>
+
+                    <div class="field">
+                        {{ form.password.errors }}
+                        <label for="id_subject">Password:</label>
+                        {{ form.password }}
+
+                    </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Patient details</legend>
+                    <div class="field">
+                        {{ form.email.errors }}
+                        <label for="id_subject">Email:</label>
+                        {{ form.email }}
+
+                    </div>
+
+                    <div class="field">
+                        {{ form.NHSno.errors }}
+                        <label for="id_subject"> NHSNo:</label>
+                        {{ form.NHSno}}
+
+                    </div>
+
+                    <div class="field">
+                        {{ form.firstname.errors }}
+                        <label for="id_subject">First name :</label>
+                        {{ form.firstname }}
+
+                    </div>
+
+                    <div class="field">
+                        {{ form.lastname.errors }}
+                        <label for="id_subject">Last name :</label>
+                        {{ form.lastname }}
+
+                    </div>
+
+                     <div class="field">
+                        {{ form.phoneNo.errors }}
+                        <label for="id_subject">Phone No :</label>
+                        {{ form.phoneNo}}
+
+                    </div>
+
+                      <div class="field">
+                        {{ form.address.errors }}
+                        <label for="id_subject">Address :</label>
+                        {{ form.address }}
+
+                    </div>
+
+
+                </fieldset>
+
+
+                 {% csrf_token %}
+                <input type="submit"  value="Submit">
+            </form>
+
+            {% endblock %}
+

@@ -1,0 +1,67 @@
+{% extends 'userPage.html' %}
+
+{% block head %}
+  {% load staticfiles %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/latest/themes/base/jquery-ui.css" media="all" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+</script>
+
+<!-- This is a modern and creative business template with a vivid and warm color scheme.
+The template was created with HTML, CSS and CSS3, using Gimp and gedit.
+Some photos were used from http://www.freedigitalphotos.net/ .
+
+Designed by Ioana Condor
+http://behindtheovermind.wordpress.com/
+-->
+
+    <!-- Main theme css -->
+ <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+    <style type="text/css">
+
+    </style>
+<title> My prescriptions</title>
+{% endblock %}
+
+{% load staticfiles %}
+
+
+
+{% block userContent %}
+    <div class="wrapper">
+
+  {% for key, value in form.errors.items %}
+      <p>{{ value }}</p>
+  {% endfor %}
+
+  <form action="" method="post">{% csrf_token %}
+
+    {% for field in form %}
+      <div class="field-wrapper">
+
+        <div class="field-label">
+          {{ field.label_tag }}:
+        </div>
+
+        <div class="field-field">
+          {{ field }}
+          {{ field.errors }}
+        </div>
+
+      </div>
+    {% endfor %}
+
+    <br>
+    <input type="submit" value="Charge Me!" />
+  </form>
+
+</div>
+
+
+
+{% endblock %}

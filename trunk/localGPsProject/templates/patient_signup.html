@@ -1,0 +1,37 @@
+{% extends 'forms_base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    Patients signup
+ {% endblock %}
+
+        {% block form %}
+
+         {% if form.errors %}
+                <p style="color: red;">
+                    Please correct the error{{ form.errors|pluralize }} below.
+                </p>
+            {% endif %}
+
+            <form action="" method="post">
+                   <fieldset>
+                        <legend>Login details:</legend>
+                        <div class="field">
+                            {{ form.username.errors }}
+                            <label for="id_subject">uername:</label>
+                            {{ form.username }}
+
+                        </div>
+                        <div class="field">
+                            {{ form.password.errors }}
+                            <label for="id_email">Password:</label>
+                            {{ form.password }}
+
+                        </div>
+
+                   </fieldset>
+
+            {% csrf_token %}
+                <input type="submit"  value="Submit">
+            </form>
+        {% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'userPage.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Surgerie's patients
+ {% endblock %}
+
+{% block userContent %}
+
+    <h4 > Surgery's Patients </h4> <hr/>
+
+    <div class="user_click">
+
+    <p> <a href="/admin/add_patient/"> add patient</a> </p>
+    </div>
+
+
+
+    {% if not patients|length >= 1  %}
+        There are currently no patients registered with this surgery
+        {% else %}
+        <table class="CSSTableGenerator">
+        <tr>
+        <td> name</td>
+        <td> NHS No</td>
+        <td>phone No.</td>
+        <td>username</td>
+        <td>email </td>
+        <td></td>
+        </tr>
+         {% for patient in patients %}
+             <tr>
+             <td>{{ patient.get_name }}</td>
+             <td> {{ patient.NHS_No }}</td>
+             <td>{{ patient.phoneNo }}</td>
+             <td>{{ patient.userProfile.get_username }}</td>
+             <td>{{ patient.userProfile.get_email }}</td>
+             <td><a href="/admin/delete_patient/{{ patient.pk }}/">remove</a></td>
+             </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+    <div class="admin_add">
+
+    <p> <a href="/admin/transfer_from_request/"> View transfer request from your surgery</a> </p>
+    </div>
+
+    <div class="admin_add">
+
+    <p> <a href="/admin/transfer_to_request/"> View transfer request to your surgery</a> </p>
+    </div>
+
+
+{% endblock %}

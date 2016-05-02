@@ -1,0 +1,108 @@
+{% extends 'userPage.html' %}
+{% block head %}
+  {% load staticfiles %}
+    {% load scheduleCalendarTags %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/latest/themes/base/jquery-ui.css" media="all" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+<!-- This is a modern and creative business template with a vivid and warm color scheme.
+The template was created with HTML, CSS and CSS3, using Gimp and gedit.
+Some photos were used from http://www.freedigitalphotos.net/ .
+
+Designed by Ioana Condor
+http://behindtheovermind.wordpress.com/
+-->
+  <script type="text/javascript" src="{% static "jquery_timepicker/jquery.timepicker.js" %}"></script>
+ <link rel="stylesheet" type="text/css" href={% static  "jquery_timepicker/jquery.timepicker.css"%} />
+
+    <!-- Main theme css -->
+ <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+<style type="text/css">
+
+
+#calendar_div{
+     margin-left: 20px;
+}
+    #calendar table {
+        width: 60%;
+
+}
+
+#calendar tr th {
+    text-align: center;
+    font-size: 13px;
+    background-color: #f7d9db;
+    color: #3c373b;
+    width: 9%;
+
+}
+
+#calendar  td {
+    width: 9%;
+    border: 1px solid white;
+    vertical-align: top;
+    height: 80px;
+    padding: 2px;
+    background-color: #efe0dd;
+}
+
+#calendar td.previous {
+    background-color: #eee;
+}
+
+#calendar td.filled {
+    background-color: #99ccff;
+}
+
+#calendar td#today {
+    border: 4px solid #ffbfc5;
+}
+
+#calendar .dayNumber {
+    font-size: 16px !important;
+    font-weight: bold;
+}
+
+#calendar a {
+    font-size: 10px;
+}
+
+    </style>
+<title>My schedule</title>
+{% endblock %}
+
+
+{% load staticfiles %}
+
+
+
+{% block userContent %}
+    <h4 > Monthly Calendar</h4> <hr/> <br>
+
+ <div id="calendar_div">
+<table >
+    <tr>
+        <td width="10%" align="left">
+          &lt;&lt; <a href="/accounts/mySchedule/{{Calendar.previousyear}}/{{Calendar.previousMonth}}/">{{Calendar.previousMonth|month_name}} {{Calendar.previousyear}}</a>
+        </td>
+
+        <td width="10%" align="center">{{Calendar.split_monthday.current_monthname  }},
+            {{Calendar.split_monthday.current_yr}}</td>
+
+        <td width="10%" align="right">
+          <a href="/accounts/mySchedule/{{Calendar.nextyear}}/{{Calendar.nextMonth}}/">{{Calendar.nextMonth|month_name}} {{Calendar.nextyear}}</a> &gt;&gt;
+        </td>
+    </tr>
+</table>
+
+ <form action="/accounts/save_schedule/" method="post">
+    {{ Calendar.format_display|safe|escape}}
+    {% csrf_token %}
+
+  <input type="submit" value="Save schedule">
+  </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'userPage.html' %}
+
+{% block head %}
+  {% load staticfiles %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/latest/themes/base/jquery-ui.css" media="all" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('#booking_date').datepicker({ minDate:0,
+                                        dateFormat: "dd-M-yy"});
+
+
+
+    });
+
+</script>
+<!-- This is a modern and creative business template with a vivid and warm color scheme.
+The template was created with HTML, CSS and CSS3, using Gimp and gedit.
+Some photos were used from http://www.freedigitalphotos.net/ .
+
+Designed by Ioana Condor
+http://behindtheovermind.wordpress.com/
+-->
+
+    <!-- Main theme css -->
+ <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+<title> My patients' bookings</title>
+{% endblock %}
+
+{% load staticfiles %}
+
+
+
+{% block userContent %}
+      <h4 > My appointments</h4> <hr/> <br>
+
+    <!-- table for display of closed appointments-->
+
+    <!-- Form for choosing date -->
+        <div>
+     <form action="/doctor_accounts/booked_appointment_date/" method="post">
+
+          {% if date_error|length >= 1  %}
+              <ul>
+              {% for error in date_error %}
+                 <li>{{error }}</li>
+              {% endfor %}
+              </ul>
+         {% endif %}
+
+     <label for="date"> Change start date :</label>
+
+        <input id="booking_date" type="date" name="date">
+
+
+                 {% csrf_token %}
+                <input type="submit"  value="show available slots">
+            </form>
+        </div>
+
+    <!-- display for pending appointments-->
+    <table>
+    {% if pending_bookings|length >= 1 %}
+        <P>All your booking starting from:{{ date }} </P>
+            {% for booking in pending_bookings %}
+
+                <tr>
+
+                 <td>
+                    {% if today ==  booking.doctorAvailability.date  %}
+                    today
+                    {% else %}
+                    {{ booking.doctorAvailability.date }}
+                    {% endif %}
+                </td>
+
+                <td>{{ booking.doctorAvailability.timeSlot }}</td>
+                    <td>  {{ booking.get_patient_name}}</td>
+                <td><a href="/doctor_accounts/appointment_patient_records/{{ booking.pk_val }}/">Edit</a></td>
+                <td><a href="/doctor_accounts/appointment_close/{{ booking.pk_val }}/">Close appointment </a></td>
+                </tr>
+
+            {% endfor %}
+        {% else %}
+        <p> You have no booked appointments from: {{ date }}</p>
+
+    {% endif %}
+    </table>
+
+{% endblock %}

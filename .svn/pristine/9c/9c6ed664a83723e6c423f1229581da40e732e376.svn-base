@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block midpage %}
+
+    {% block page_description %}
+           {% include 'include/page_description.html' %}
+     {% endblock %}
+
+    {% block two_parts %}
+        <div id="two_parts">
+            <div id="two_parts_content">
+        {% block form_part %}
+
+              <!---
+              form enters here
+              -->
+
+         {% endblock %}
+        </div>
+    </div>
+    {% endblock %}
+
+
+{% endblock %}

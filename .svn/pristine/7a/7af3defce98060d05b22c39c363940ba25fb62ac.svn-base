@@ -1,0 +1,39 @@
+{% extends 'userPage.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Change email
+ {% endblock %}
+
+{% block userContent %}
+
+    <h4 > Request surgery transfer </h4> <hr/>
+
+
+<form action="" method="post">
+
+ {% if form.errors|length >= 1 %}
+     <div class="errors">
+     please fix the following error{{ form.errors|pluralize }}
+     {% for key, value in form.errors.items %}
+      <p>{{ value }}</p>
+  {% endfor %}
+     </div>
+
+  {% endif %}
+<P> Your current surgery is : {{ request.session.userSurgery }}</P>
+
+Please select the surgery you want to transfer to below
+<p>
+
+    <label for="toSurgery">Select transfer surgery:</label>
+    {{ form.toSurgery }}</p>
+
+
+{% csrf_token %}
+<input type="submit" value="Submit request">
+        </form>
+
+
+
+{% endblock %}

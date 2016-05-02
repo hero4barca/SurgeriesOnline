@@ -1,0 +1,67 @@
+{% extends 'userPage.html' %}
+
+{% block head %}
+  {% load staticfiles %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/latest/themes/base/jquery-ui.css" media="all" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+</script>
+
+<!-- This is a modern and creative business template with a vivid and warm color scheme.
+The template was created with HTML, CSS and CSS3, using Gimp and gedit.
+Some photos were used from http://www.freedigitalphotos.net/ .
+
+Designed by Ioana Condor
+http://behindtheovermind.wordpress.com/
+-->
+
+    <!-- Main theme css -->
+ <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+    <style type="text/css">
+
+    </style>
+<title> Pending referrals</title>
+{% endblock %}
+
+{% load staticfiles %}
+
+
+
+{% block userContent %}
+     <h4 > Referral details</h4> <hr/>
+
+    <div id="ref_details">
+
+    <p> date:
+        {% if ref.fixedDate == Null and ref.fixedTime == Null  %}
+            no date given
+                    {% elif ref.fixed == False %}
+
+                       proposed: {{ ref.fixedDate }} :{{ ref.fixedTime }}
+                        <a href="/accounts/accept_ref_date/{{ ref.pk }}/"> confirm </a> |  <a href="/accounts/reject_ref_date/{{ ref.pk }}/"> decline </a>
+                        {% else %}
+                         {{ ref.fixedDate }}: {{ ref.fixedTime }}
+                        fixed
+                    {% endif %}</p>
+
+    <P> hospital : {{ ref.specializedFacility.name }}<br/>
+        address: {{ ref.specializedFacility.address }}<br/>
+        contact no:{{ ref.specializedFacility.phoneNo }}<br/>
+
+    </P>
+
+    <P>referred by:{{ ref.doctorAppointment.get_doctor }}<br/>
+    referred on: {{ ref.doctorAppointment.get_date }}<br/>
+    </P>
+
+    <p> referral details: {{ ref.details }}</p>
+
+    </div>
+
+{% endblock %}
+

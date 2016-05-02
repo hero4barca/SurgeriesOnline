@@ -1,0 +1,95 @@
+{% extends 'userPage.html' %}
+
+{% block head %}
+  {% load staticfiles %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/latest/themes/base/jquery-ui.css" media="all" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+</script>
+
+<!-- This is a modern and creative business template with a vivid and warm color scheme.
+The template was created with HTML, CSS and CSS3, using Gimp and gedit.
+Some photos were used from http://www.freedigitalphotos.net/ .
+
+Designed by Ioana Condor
+http://behindtheovermind.wordpress.com/
+-->
+
+    <!-- Main theme css -->
+ <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+    <style type="text/css">
+
+    </style>
+<title> My prescriptions</title>
+{% endblock %}
+
+{% load staticfiles %}
+
+
+
+{% block userContent %}
+     <h4 >My Prescriptions</h4> <hr/>
+    <div id="my-prescriptions">
+
+     <table class="table_data">
+        {% if myPrescriptions|length >= 1 %}
+            <tr>
+
+            <th>prescription details</th>
+            <th> doctor name</th> <th>price</th> <th>payment status</th> <th>delivery status</th>
+            </tr>
+                {% for prescription in myPrescriptions %}
+
+                    <tr>
+
+                    <td>{{ prescription.details }}</td>
+                        <td>{{ prescription.doctorAppointment.get_doctor }}</td>
+                    <td>
+                        {% if prescription.price == None %}
+                             not yet priced
+                        {% elif not prescription.paymentStatus %}
+                            <!-- Link to pay-->
+                            <a href="/accounts/prescription_payment/{{ prescription.pk_val }}/">{{ prescription.price }}</a>
+
+                            {% else %}
+                                {{ prescription.price }}
+                        {% endif %}
+
+                    </td>
+                    <td>
+                        {% if not prescription.paymentStatus  %}
+                            not paid
+                        {% else %}
+                        payment made
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not prescription.deliveryStatus   %}
+                            not delivered
+                            {% else %}
+                            delivered
+                        {% endif %}
+                    </td>
+                    </tr>
+
+                {% endfor %}
+            {% else %}
+            <p> You have no pending prescriptions</p>
+
+        {% endif %}
+        </table>
+
+
+
+
+       </div>
+
+
+
+
+{% endblock %}

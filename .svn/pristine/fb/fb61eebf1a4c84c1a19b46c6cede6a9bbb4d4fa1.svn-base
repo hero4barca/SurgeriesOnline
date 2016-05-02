@@ -1,0 +1,37 @@
+{% extends 'userPage.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Change email
+ {% endblock %}
+
+{% block userContent %}
+
+    <h4 > Change email </h4> <hr/>
+
+
+<form action="" method="post">
+
+ {% if form.errors|length >= 1 %}
+     <div class="errors">
+     please fix the following error{{ form.errors|pluralize }}
+     <ul>
+      {% for error in form.errors  %}
+         <li> {{ error }}</li>
+     {% endfor %}
+     </ul>
+     </div>
+
+  {% endif %}
+<p>
+    <label for="newEmail">Enter new email:</label>
+    {{ form.newEmail }}</p>
+
+
+{% csrf_token %}
+<input type="submit" value="change email">
+        </form>
+
+
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'solutions.html' %}
+{% load staticfiles %}
+
+{% block title %}
+
+    Registration page
+ {% endblock %}
+
+
+            {% block midpage%}
+
+                <div id="contact_us">
+                        <p class="two_parts_title">Contact Us </p>
+                        <p class="description">
+                            To contact us please send us an email below
+                             </p>
+                        <div id="contact_form">
+                        <form action="/contact/" method="post">
+
+                          {% if form.errors %}
+                            <p style="color: red;">
+                                Please correct the error{{ form.errors|pluralize }} below.
+                            </p>
+                                {% if form.message.errors %}
+                                <ul>
+                                {% for error in form.message.errors %}
+                                    <li><strong>{{ error }}</strong></li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+
+                        {% endif %}
+
+
+                            <div class="field">
+                                {{ form.name.errors }}
+                                <label for="name" class="description">enter name:</label>
+                                {{ form.name}}
+                            </div>
+
+                        <div class="field">
+                                {{ form.email.errors }}
+                                <label for="email" class="description">your email:</label>
+                                {{ form.email}}
+                            </div>
+
+                        <div class="field">
+                                {{ form.subject.errors }}
+                                <label for="subject" class="description">subject:</label>
+                                {{ form.subject}}
+                            </div>
+
+                        <div class="field">
+                                {{ form.message.errors }}
+                                <label for="message" class="description">message:</label>
+                                {{ form.message}}
+                            </div>
+                        {% csrf_token %}
+                         <input type="submit"  value="Send">
+                        </form>
+
+
+                        </div>
+
+            </div>
+
+
+            {% endblock %}
+
+

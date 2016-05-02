@@ -1,0 +1,120 @@
+{% extends 'forms_base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+
+    Register a Hospital
+ {% endblock %}
+
+{% block page_description %}
+    <div id="page_description">
+            <div id="page_description_content">
+                        <p class="two_parts_title">Register a hospital</p>
+                        <p class="description">
+                            Creates an online portal for the hospital
+                        </p>
+                        <ul >
+                            <li class="description" > Enter details of hospital i.e. name, address, contact details </li>
+                            <li class="description"> Enter account login details - username, password etc.</li>
+                        </ul>
+            </div>
+        </div>
+    <ul>
+
+    </ul>
+{% endblock %}
+
+
+ {% block form_part%}
+
+
+
+
+
+            <form action="/register/hospital/" method="post">
+
+            {% if form.errors %}
+                <p style="color: red;">
+                    Please correct the error{{ form.errors|pluralize }} below.
+                </p>
+                    {% if form.message.errors %}
+                    <ul>
+                    {% for error in form.message.errors %}
+                        <li><strong>{{ error }}</strong></li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endif %}
+            <fieldset>
+                <legend>Hospital details:</legend>
+                <div class="field">
+                    {{ form.hospitalName.errors }}
+                    <label for="id_subject">Hospital name:</label>
+                    {{ form.hospitalName }}
+
+                </div>
+                <div class="field">
+                    {{ form.address.errors }}
+                    <label for="id_email">Hospital address:</label>
+                    {{ form.address }}
+
+                </div>
+
+                <div class="field">
+                        {{ form.phoneNo.errors }}
+                        <label for="id_subject">Contact No:</label>
+                        {{ form.phoneNo }}
+
+                    </div>
+                </fieldset>
+                <!--
+                Loging temporarily unimplemented
+                <fieldset>
+                    <legend>Account details</legend>
+
+                    <div class="field">
+
+                        <label for="id_subject">Login username:</label>
+
+                    </div>
+
+                    <div class="field">
+
+                        <label for="id_subject"> Login password:</label>
+
+
+                    </div>
+                    </Fieldset>-->
+
+                    <fieldset>
+                     <legend>Account details</legend>
+
+                    <div class="field">
+                        {{ form.email.errors }}
+                        <label for="id_subject">Email:</label>
+                        {{ form.email }}
+
+                    </div>
+                        <div class="field">
+                        {{ form.username.errors }}
+                        <label for="id_subject">Username:</label>
+                        {{ form.username }}
+
+                    </div>
+                         <div class="field">
+                        {{ form.password.errors }}
+                        <label for="id_subject">Password:</label>
+                        {{ form.password }}
+
+                    </div>
+
+
+                </fieldset>
+
+
+                 {% csrf_token %}
+                <input type="submit"  value="Submit">
+            </form>
+
+            {% endblock %}
+

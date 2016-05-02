@@ -1,0 +1,38 @@
+{% extends 'solutions.html' %}
+{% load staticfiles %}
+
+{% block title %}
+
+    Registration page
+ {% endblock %}
+
+
+            {% block midpage%}
+
+                <div id="contact_us">
+                        <p class="two_parts_title">Project  </p>
+                        <p class="description">
+                            This Surgeries Online project is the output of an academic exercise aimed at developin a prototype system for GPs and surgeries
+
+                             </p>
+                    <p class="description"> The projected is developed by IfiokAbasi Essien and supervised by Nicole Yap at the University of Leicester </p>
+                    <p class="description">is a project which focuses on health care delivery aiming to ease, enhance and further automate
+                        interactions between the major actors especially focusing on the patients.
+                        Surgeries and hospitals can register with the system while various user types are associated with a surgery.</p>
+                <p class="description">
+                  Motivation: Although most surgeries have an online system which patients have access to, only limited functionalities
+                    (mainly booking of appointments with doctors) are accessible to patients. The proposed system however aims to support
+                    much more functionalities for the patients and reduce the need to physically visit the surgery as much as possible.
+                    It would also provide patients with historic records of their data by being able to view their activities over time.
+                    </p>
+                <p class="description">
+                    The system then provides functionalities which support various actions an interactions between users associated with a given surgery e.g.
+                    booking/managing of appointments with nurses and doctors, making and management of prescriptions etc.
+                    The system also provides support for interactions between different medical facilities which have to do with a patient.
+                </p>
+                </div>
+
+
+            {% endblock %}
+
+

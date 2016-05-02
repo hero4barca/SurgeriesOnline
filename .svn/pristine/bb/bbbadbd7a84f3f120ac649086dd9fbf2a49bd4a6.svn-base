@@ -1,0 +1,31 @@
+{% extends 'forms_base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    successfully completed
+ {% endblock %}
+
+{% block midpage %}
+
+    {% block page_description %}
+           {% include 'include/page_description.html' %}
+
+     {% endblock %}
+
+    {% block two_parts %}
+        <div id="two_parts">
+            <div id="two_parts_content">
+                {% if message == None %}
+                <P>You were successfully {{ event }}, please click <a href="/accounts/login/"> here </a>to login</P>
+                {% else %}
+                <p>{{ message|safe|escape }}</p>
+                {% endif %}
+
+
+         </div>
+    </div>
+
+    {% endblock %}
+
+
+{% endblock %}

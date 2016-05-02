@@ -1,0 +1,162 @@
+{% extends 'userPage.html' %}
+
+{% block head %}
+  {% load staticfiles %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/latest/themes/base/jquery-ui.css" media="all" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+</script>
+
+<!-- This is a modern and creative business template with a vivid and warm color scheme.
+The template was created with HTML, CSS and CSS3, using Gimp and gedit.
+Some photos were used from http://www.freedigitalphotos.net/ .
+
+Designed by Ioana Condor
+http://behindtheovermind.wordpress.com/
+-->
+
+    <!-- Main theme css -->
+ <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+    <style type="text/css">
+
+    </style>
+<title> My patients' appointments</title>
+{% endblock %}
+
+{% load staticfiles %}
+
+
+
+{% block userContent %}
+     <h4 > Consultation page</h4> <hr/>
+    <div style="clear: both; margin-top:40px; min-width:100%">
+
+    {% if form.errors %}
+                <p style="color: red;">
+                    Please correct the error{{ form.errors|pluralize }} below.
+                </p>
+                    {% if form.message.errors %}
+                        <ul>
+                    {% for error in form.message.errors %}
+                        <li><strong>{{ error }}</strong></li>
+                    {% endfor %}
+                    </ul>
+
+                {% endif %}
+            {% endif %}
+<form action="/doctor_accounts/update_patient_records/" method="post">
+        <div id="tabs" style="font-size: small">
+
+          <ul>
+
+            <li style="font-size: medium"><a href="#tabs-appointment">Current Appointment</a></li>
+            <li style="font-size: medium"><a href="#tabs-prescription">Make Prescription</a></li>
+               <li style="font-size: medium"><a href="#tabs-referral">Make Referral</a></li>
+              <li style="font-size: medium"><a href="#tabs-history">View Parient's History</a></li>
+          </ul>
+
+
+            <div id="tabs-history">
+            <em>
+                Patient History : {{ patient.get_name }}
+            </em><hr/>
+
+                <div id="history"> <table id="patient_history">
+                    <tr>
+                        <th> Appointment details</th>
+                        <th> Doctor/Nurse remarks</th>
+                        <th>Prescriptions</th>
+                        <th>Referrals </th>
+                    </tr>
+                    {% for ph in patient_History %}
+                        <tr>
+                        <td>
+                            A {{ ph.type  }} appointment on {{ ph.date }}
+                            with <i>{{ ph.personnel }}</i> <br/>
+                            {{ ph.surgery }}
+                        </td>
+                        <td>
+                            {{ ph.appointment.details }}
+                        </td>
+                        <td>
+                            {% if ph.type == "doctor's" %}
+                                {{ ph.prescription.details }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if ph.type == "doctor's" %}
+                                {{ ph.referral.details }}
+                            {% endif %}
+                        </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </table>
+
+                </div>
+                 <div><a href="/accounts/generate_report/{{patient.pk }}/"> generate report</a></div>
+          </div>
+
+          <div id="tabs-appointment">
+              <em> Enter consultation details here</em>
+            <hr/><br/>
+
+                {{ form.consultationDetails.errors }}
+
+                <label for="">Please enter consultation details:</label><br/>
+              {{ form.consultationDetails }}
+
+          </div>
+
+
+
+          <div id="tabs-prescription">
+              <em> Make prescriptions here</em>
+             <hr/><br/>
+              {{ form.prescription.errors }}
+              <p>
+            <label for="">Tick to submit prescriptions </label>
+              {{ form.prescription }}</p>
+
+              {{ form.prescriptionDetails.errors }}
+              <label for=""> Enter prescription here:</label><br/>
+            {{ form.prescriptionDetails }}
+
+
+          </div>
+
+        <div id="tabs-referral">
+            <em> Refer patient here</em>
+            <hr/><br/>
+            {{ form.referral.errors }}
+            <p>
+            <label for="">Tick to submit referrals </label>
+              {{ form.referral }}</p>
+            <p>
+            {{ form.referralFacilityName.errors }}
+            <label> Select Hospital: </label>
+            {{ form.referralFacilityName }}</p>
+
+              {{ form.referralDetails.errors }}
+              <label for=""> Enter referral details here:</label><br/>
+            {{ form.referralDetails }}
+        </div>
+
+        </div>
+    {% csrf_token %}
+    <hr/>
+Save all here -
+<input type="submit" value="Save all">
+
+</form>
+
+</div>
+
+{% endblock %}

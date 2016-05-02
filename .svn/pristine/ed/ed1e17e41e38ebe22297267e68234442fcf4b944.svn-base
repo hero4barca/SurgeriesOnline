@@ -1,0 +1,52 @@
+{% extends 'forms_base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+
+    Login page
+ {% endblock %}
+
+{% block page_description %}
+    <div id="page_description">
+            <div id="page_description_content">
+                        <p class="two_parts_title">Login page</p>
+                        <p class="description">
+                           Login with your credentials to access your account.
+                        </p>
+                        <p class="description">
+                          - Username, password required
+                        </p>
+
+
+            </div>
+        </div>
+    <ul>
+
+    </ul>
+{% endblock %}
+
+        {% block form_part %}
+
+         <form action="" method="post">
+
+          {% if form.errors %}
+                <p style="color: red;">
+                    Login details not recognized. Please confirm your login details and try again.
+                </p>
+            {% endif %}
+
+            <fieldset>
+            <legend>Login details:</legend>
+            {{ form.username.errors }}
+            <label for="username">User name:</label>
+            <input type="text" name="username" value="" id="username"> <br/> <br/>
+            {{ form.password.errors }}
+            <label for="password">Password:</label>
+            <input type="password" name="password" value="" id="password"> <br/><br/>
+            {% csrf_token %}
+
+
+            </fieldset>
+         <input type="submit" value="login" />
+          </form>
+        {% endblock %}

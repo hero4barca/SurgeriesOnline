@@ -1,0 +1,43 @@
+{% extends 'userPage.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Surgeries Nurses
+ {% endblock %}
+
+{% block userContent %}
+
+    <h4 > Surgery's Nurses </h4> <hr/>
+
+    <div class="user_click">
+
+    <p> <a href="/admin/add_nurse/"> add nurse</a> </p>
+    </div>
+
+    {% if not nurses|length >= 1  %}
+        There are currently no doctors with this surgery
+        {% else %}
+        <table class="CSSTableGenerator">
+        <tr>
+        <td> name</td>
+        <td> id</td>
+        <td>phone No.</td>
+        <td>username</td>
+        <td>email </td>
+        <td></td>
+        </tr>
+         {% for nurse in nurses %}
+             <tr>
+             <td>{{ nurse.nurse_name }}</td>
+             <td> {{ nurse.staffNo }}</td>
+             <td>{{ nurse.phoneNo }}</td>
+             <td>{{ nurse.userProfile.get_username }}</td>
+             <td>{{ nurse.userProfile.get_email }}</td>
+             <td><a href="/admin/delete_nurse/{{ nurse.pk }}/">remove</a></td>
+             </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+
+
+{% endblock %}

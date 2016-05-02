@@ -1,0 +1,44 @@
+{% extends 'userPage.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Surgerie's patients
+ {% endblock %}
+
+{% block userContent %}
+
+    <h4 > Patients' transfer 'to' request </h4> <hr/>
+
+
+    {% if not transfer|length >= 1  %}
+    <p> There are currently no request for transfers 'to' your surgery</p>
+    {% else %}
+        <table class="table_data">
+        <thead>
+        <td>Patient Name</td>
+        <td> from surgery</td>
+        <td> request date</td>
+        <td>approval</td>
+        </thead>
+        {% for t in transfer %}
+            <tr>
+            <td><a href="/admin/transfer_request_details/{{ t.pk }}"> {{ t.patient.get_name }} </a></td>
+            <td>{{ t.fromSurgery.name }}</td>
+            <td>{{ t.requestDate }}</td>
+            <td>
+                {% if  t.approve == Null  %}
+                   <a href="/admin/accept_patient_transfer_request/{{ t.pk }}/">accept</a>  | <a href="/admin/decline_patient_transfer_request/{{ t.pk }}/">decline</a>
+                    {% elif t.approve == False %}
+                    Declined
+                    {% elif t.approve == True %}
+                    Approved on {{ t.approvalDate }}
+                {% endif %}
+            </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+
+
+
+{% endblock %}

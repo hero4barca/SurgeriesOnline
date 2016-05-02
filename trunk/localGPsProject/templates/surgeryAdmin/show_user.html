@@ -1,0 +1,56 @@
+{% extends 'userPage.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Surgerie's users
+ {% endblock %}
+
+{% block userContent %}
+
+    <h4 > Surgery's users </h4> <hr/>
+
+
+
+    {% if not profiles|length >= 1  %}
+        There are currently no users with this surgery
+        {% else %}
+        <table class="CSSTableGenerator">
+        <tr>
+        <td> firstname</td>
+        <td> lastname</td>
+        <td>username</td>
+        <td>user type</td>
+        <td>date joined </td>
+        <td> is active</td>
+        <td></td>
+        <td></td>
+        </tr>
+         {% for profile in profiles %}
+             <tr>
+             <td>{{ profile.user.first_name }}</td>
+             <td> {{ profile.user.last_name }}</td>
+             <td>{{ profile.user.username }}</td>
+             <td>{{ profile.usertype }}</td>
+             <td>{{ profile.user.date_joined.date }}</td>
+                 <td>
+                     {% if profile.user.is_active %}
+                 active
+                 {% else %}
+                 not active
+                 {% endif %}
+                 </td>
+             <td><a href="/admin/reset_user_password/{{ profile.user.pk }}/">reset password</a></td>
+             <td>
+                 {% if profile.user.is_active %}
+                 <a href="/admin/deactivate_user/{{ profile.user.pk }}/"> deactivate</a>
+                 {% else %}
+                 <a href="/admin/reactivate_user/{{ profile.user.pk }}/">reactivate</a>
+                 {% endif %}
+             </td>
+             </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+
+
+{% endblock %}

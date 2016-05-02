@@ -1,0 +1,133 @@
+{% extends 'userPage.html' %}
+{% block head %}
+  {% load staticfiles %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/latest/themes/base/jquery-ui.css" media="all" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('#id_startdate').datepicker();
+        $('#id_firstday').datepicker(); $('#id_secondday').datepicker(); $('#id_thirdday').datepicker();
+         $('#id_fourthday').datepicker(); $('#id_fifthday').datepicker(); $('#id_sixthday').datepicker();
+        $('#id_seventhday').datepicker();
+    });
+
+$(document).ready(function(){
+    $('#id_startdate').change(function(){
+        $startdate = new Date( $('#id_startdate').val())
+         $('#id_firstday').val($startdate.toLocaleDateString())
+        $startdate.setDate($startdate.getDate()+ 1)
+        $('#id_secondday').val($startdate.toLocaleDateString())
+        $startdate.setDate($startdate.getDate()+ 1)
+        $('#id_thirdday').val($startdate.toLocaleDateString())
+        $startdate.setDate($startdate.getDate()+ 1)
+        $('#id_fourthday').val($startdate.toLocaleDateString())
+        $startdate.setDate($startdate.getDate()+ 1)
+        $('#id_fifthday').val($startdate.toLocaleDateString())
+        $startdate.setDate($startdate.getDate()+ 1)
+        $('#id_sixthday').val($startdate.toLocaleDateString())
+        $startdate.setDate($startdate.getDate()+ 1)
+        $('#id_seventhday').val($startdate.toLocaleDateString())
+
+    });
+});
+
+
+</script>
+    <script type="text/javascript">
+    $(function() {
+        $('#id_firstdayStarttime').timepicker();
+    });
+
+</script>
+<!-- This is a modern and creative business template with a vivid and warm color scheme.
+The template was created with HTML, CSS and CSS3, using Gimp and gedit.
+Some photos were used from http://www.freedigitalphotos.net/ .
+
+Designed by Ioana Condor
+http://behindtheovermind.wordpress.com/
+-->
+   <script type="text/javascript" src="{% static "jquery_timepicker/jquery.timepicker.js" %}"></script>
+  <link rel="stylesheet" type="text/css" href={% static  "jquery_timepicker/jquery.timepicker.css"%} />
+
+    <!-- Main theme css -->
+ <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+<title>My schedule</title>
+{% endblock %}
+
+
+{% load staticfiles %}
+
+
+
+{% block userContent %}
+    {% if form.errors %}
+                <p style="color: red;">
+                    Please correct the error{{ form.errors|pluralize }} below.
+                </p>
+                    {% if form.message.errors %}
+
+                {% endif %}
+            {% endif %}
+
+    <form action="/accounts/temp/" method="post">
+
+
+
+
+                    <div class="field">
+                        {{ form.startdate.errors }}
+                        <label for="id_subject">Choose start date(for week):</label>
+                        {{ form.startdate }}
+                    </div>
+    <table>
+        <tr><th>Day</th><th>start time</th><th>stop time</th></tr>
+        <tr>
+            <td>{{ form.firstday.errors }}<br/> {{ form.firstday }}</td>
+            <td>{{ form.firstdayStarttime.errors }}<br/>{{ form.firstdayStarttime }}</td>
+            <td>{{ form.firstday_stoptime.errors }}<br/>{{ form.firstday_stoptime }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.secondday.errors }}<br/> {{ form.secondday }}</td>
+            <td>{{ form.secondday_starttime.errors }}<br/>{{ form.secondday_starttime }}</td>
+            <td>{{ form.secondday_stoptime.errors }}<br/>{{ form.secondday_stoptime }}</td>
+        </tr>
+
+        <tr>
+            <td>{{ form.thirdday.errors }}<br/> {{ form.thirdday }}</td>
+            <td>{{ form.thirdday_starttime.errors }}<br/>{{ form.thirdday_starttime }}</td>
+            <td>{{ form.thirdday_stoptime.errors }}<br/>{{ form.thirdday_stoptime }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.fourthday.errors }}<br/> {{ form.fourthday }}</td>
+            <td>{{ form.fourthday_starttime.errors }}<br/>{{ form.fourthday_starttime }}</td>
+            <td>{{ form.fourthday_stoptime.errors }}<br/>{{ form.fourthday_stoptime }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.fifthday.errors }}<br/> {{ form.fifthday }}</td>
+            <td>{{ form.fifthday_starttime.errors }}<br/>{{ form.fifthday_starttime }}</td>
+            <td>{{ form.fifthday_stoptime.errors }}<br/>{{ form.fifthday_stoptime }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.sixthday.errors }}<br/> {{ form.sixthday }}</td>
+            <td>{{ form.sixthday_starttime.errors }}<br/>{{ form.sixthday_starttime }}</td>
+            <td>{{ form.sixthday_stoptime.errors }}<br/>{{ form.sixthday_stoptime }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.seventhday.errors }}<br/> {{ form.seventhday }}</td>
+            <td>{{ form.seventhday_starttime.errors }}<br/>{{ form.seventhday_starttime }}</td>
+            <td>{{ form.seventhday_stoptime.errors }}<br/>{{ form.seventhday_stoptime }}</td>
+        </tr>
+
+    </table>
+        <div class="field">
+                    {{ form.entireMonth.errors }}
+                    <label for="id_subject">Click here to replicate as weekly schedule for entire month</label>
+                    {{ form.entireMonth }}
+                </div>
+     {% csrf_token %}
+                <input type="submit"  value="Save schedule">
+    </form>
+
+{% endblock %}

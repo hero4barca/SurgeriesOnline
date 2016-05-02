@@ -1,0 +1,9 @@
+<div id="nav_bar" class="nav_bar">
+
+    <ul>
+        <li> <a href="/accounts/profile/">Profile</a></li>
+        <li><a href="/accounts/pending_prescriptions/"> Pending Prescriptions</a></li>
+        <!-- <li> <a href="">payments due</a></li>-->
+    </ul>
+
+</div>

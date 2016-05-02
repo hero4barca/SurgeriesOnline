@@ -1,0 +1,43 @@
+{% extends 'userPage.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Account Settings
+ {% endblock %}
+
+{% block userContent %}
+
+    <h4 > Accounts Settings </h4> <hr/>
+
+    <div id="account_settings">
+
+    <ul>
+        <li> <a href="/accounts/change_password/">change password</a></li>
+        <li> <a href="/accounts/change_email/">change email</a></li>
+        {% if request.session.usertype == 'patient' or request.session.usertype == 'doctor' or request.session.usertype == 'nurse'%}
+        <li> <a href="/accounts/change_address/">change address</a></li>
+        {% endif %}
+
+        {% if not request.session.usertype == 'surgeryAdmin' %}
+        <li> <a href="/accounts/change_phoneNo/">change phone</a></li>
+    {% endif %}
+    </ul>
+    {% if request.session.usertype == 'patient' %}
+    </div>
+
+    <div id="patient_request" style="margin-left: 15px;">
+    <u>Surgery Transfer Requet</u> <br/>
+     {% if transfer == None %}
+    <a href="/accounts/request_surgery_transfer/">  request records transfer</a>
+         {% elif transfer.approve == None %}
+         your transfer request to: {{ transfer.toSurgery }} <br/>
+         requested on: {{ transfer.requestDate }} is awaiting approval
+
+    {% endif %}
+
+    </div>
+    {% endif %}
+
+
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'userPage.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Add Doctor
+ {% endblock %}
+
+{% block userContent %}
+<h4 > Add Doctor</h4> <hr/>
+
+
+     <form action="/admin/add_doctor/" method="post">
+
+      {% if form.errors %}
+                <p style="color: red;">
+                    Please correct the error{{ form.errors|pluralize }} below.
+                </p>
+                    {% if form.message.errors %}
+
+                {% endif %}
+            {% endif %}
+            <fieldset>
+                <legend>Doctor details </legend>
+                <div class="field">
+                    {{ form.firstname.errors }}
+                    <label for="id_subject">Firstname:</label>
+                    {{ form.firstname }}
+                </div>
+
+                <div class="field">
+                    {{ form.lastname.errors }}
+                    <label for="id_subject">Lastname:</label>
+                    {{ form.lastname }}
+                </div>
+
+                <div class="field">
+                    {{ form.staffNo.errors }}
+                    <label for="id_subject">Staff No:</label>
+                    {{ form.staffNo }}
+                </div>
+
+                <div class="field">
+                    {{ form.username.errors }}
+                    <label for="id_subject">Username:</label>
+                    {{ form.username }}
+
+                </div>
+
+                <div class="field">
+                    {{ form.email.errors }}
+                    <label for="id_subject">Email:</label>
+                    {{ form.email }}
+
+                </div>
+
+
+
+                <div class="field">
+                    {{ form.phoneNo.errors }}
+                    <label for="id_subject">Tel No:</label>
+                    {{ form.phoneNo }}
+
+                </div>
+
+                <div class="field">
+                    {{ form.address.errors }}
+                    <label for="id_subject">Address:</label>
+                    {{ form.address }}
+                </div>
+
+                </fieldset>
+            {% csrf_token %}
+                <input type="submit"  value="Submit" align="right">
+            </form>
+
+{% endblock %}

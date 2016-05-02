@@ -1,0 +1,56 @@
+{% extends 'userPage.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Add pharmacy
+ {% endblock %}
+
+{% block userContent %}
+
+    <h4 > Setup Pahrmacy Account</h4> <hr/>
+
+    {% if form.errors %}
+                <p style="color: red;">
+                    Please correct the error{{ form.errors|pluralize }} below.
+                </p>
+                    {% if form.message.errors %}
+
+                {% endif %}
+            {% endif %}
+
+     <form action="/admin/add_pharmacy/" method="post">
+            <fieldset>
+                <legend>Add pharmacy details </legend>
+                <div class="field">
+                    {{ form.deptName.errors }}
+                    <label for="id_subject">Department name:</label>
+                    {{ form.deptName }}
+
+                </div>
+
+                <div class="field">
+                    {{ form.email.errors }}
+                    <label for="id_subject">Email:</label>
+                    {{ form.email }}
+
+                </div>
+
+                <div class="field">
+                    {{ form.username.errors }}
+                    <label for="id_subject">Username:</label>
+                    {{ form.username }}
+
+                </div>
+
+                <div class="field">
+                    {{ form.phoneNo.errors }}
+                    <label for="id_subject">Tel No:</label>
+                    {{ form.phoneNo }}
+
+                </div>
+                </fieldset>
+                {% csrf_token %}
+                <input type="submit"  value="Submit">
+            </form>
+
+{% endblock %}

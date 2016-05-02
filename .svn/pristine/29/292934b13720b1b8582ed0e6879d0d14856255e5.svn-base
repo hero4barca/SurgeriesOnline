@@ -1,0 +1,37 @@
+{% extends 'userPage.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Change phoneNo
+ {% endblock %}
+
+{% block userContent %}
+
+    <h4 > Change Your contact number </h4> <hr/>
+
+
+<form action="" method="post">
+
+ {% if form.errors|length >= 1 %}
+     <div class="errors">
+     please fix the following error{{ form.errors|pluralize }}
+     <ul>
+      {% for error in form.errors  %}
+         <li> {{ error }}</li>
+     {% endfor %}
+     </ul>
+     </div>
+
+  {% endif %}
+<p>
+    <label for="newPhoneNo">Enter new contact No.:</label>
+    {{ form.newPhoneNo }}</p>
+
+
+{% csrf_token %}
+<input type="submit" value="Submit">
+        </form>
+
+
+
+{% endblock %}

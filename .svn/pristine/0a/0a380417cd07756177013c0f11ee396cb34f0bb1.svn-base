@@ -1,0 +1,88 @@
+{% extends 'userPage.html' %}
+
+{% block head %}
+  {% load staticfiles %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/latest/themes/base/jquery-ui.css" media="all" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+</script>
+
+<!-- This is a modern and creative business template with a vivid and warm color scheme.
+The template was created with HTML, CSS and CSS3, using Gimp and gedit.
+Some photos were used from http://www.freedigitalphotos.net/ .
+
+Designed by Ioana Condor
+http://behindtheovermind.wordpress.com/
+-->
+
+    <!-- Main theme css -->
+ <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
+    <style type="text/css">
+
+    </style>
+<title> My Medical History</title>
+{% endblock %}
+
+{% load staticfiles %}
+
+
+
+{% block userContent %}
+
+    <div id="my-history">
+            <h4>
+                Your Medical History
+            </h4><hr/>
+                {% if not medical_history|length >= 1 %}
+                    <p> There are currently no records in your surgery's online medical history</p>
+                {% else %}
+                <div id="history">
+
+                    <table id="patient_history" class="table_data">
+                    <tr>
+                        <th> Appointment details</th>
+                        <th> Doctor/Nurse remarks</th>
+                        <th>Prescriptions</th>
+                        <th>Referrals </th>
+                    </tr>
+                    {% for mh in medical_history %}
+                        <tr>
+                        <td>
+                            A {{ mh.type  }} appointment on {{ mh.date }}
+                            with <i>{{ mh.personnel }}</i> <br/>
+                            {{ mh.surgery }}
+                        </td>
+                        <td>
+                            {{ mh.appointment.details }}
+                        </td>
+                        <td>
+                            {% if mh.type == "doctor's" %}
+                                {{ mh.prescription.details }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if mh.type == "doctor's" %}
+                                {{ mh.referral.details }}
+                            {% endif %}
+                        </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </table></div>
+            <div class="user_click">
+                <a href="/accounts/generate_report/{{patientId }}/"> generate report</a>
+            </div>
+        {% endif %}
+          </div>
+
+
+
+
+{% endblock %}

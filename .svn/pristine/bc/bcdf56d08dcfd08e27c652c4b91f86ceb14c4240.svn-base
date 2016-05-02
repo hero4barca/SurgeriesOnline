@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    Our solutions
+ {% endblock %}
+
+{% block midpage %}
+
+    {% block page_description %}
+
+            <div id="page_description">
+            <div id="page_description_content">
+                        <p class="two_parts_title">Solutions</p>
+                        <p class="description">
+                            Surgeries Online offers many solutions that are readily available to all clients. Sing up for instant access
+                            to all the following solutions for your clientsa and staff.
+                             </p>
+                        <p class="description">Some of our very essential are described below</p>
+            </div>
+        </div>
+
+     {% endblock %}
+
+    {% block two_parts %}
+        <div id="two_parts">
+            <div id="two_parts_content">
+        {% block two_parts_top %}
+                <div class="two_content">
+                    <div class="two_image">
+                        <img src="{%static "img/online-access.png" %}" alt="questions" />
+                    </div>
+                    <div class="two_text">
+                        <p class="two_parts_title">Instant Access </p>
+                        <p class="description">We offer instant access to your user. This clinical staff (doctror and nurses),
+                            patients, an administrative account for your administartive purposes and an account for you surgeries'
+                            pharmacy when applicable.
+                             Visit our <a href="/register/">registration page</a> for more details
+                        </p>
+                    </div>
+                </div>
+                <div class="two_content">
+                    <div class="two_image">
+                        <img src="{% static "img/booking.jpeg"  %}" alt="appointments and bookings" />
+                    </div>
+                    <div class="two_text">
+                        <p class="two_parts_title">Appointment booking and schedules management</p>
+                        <p class="description">Provides support for booking of appointment with doctors and nurses by patients.
+                            Also supports doctors and nurses to manage their working schedule. The system also aupport cancelation of
+                            appointments and appropriate notifications
+                            </p>
+                    </div>
+                </div>
+                <div class="two_content">
+                    <div class="two_image">
+                        <img src= "{% static "img/prescriptions.jpg" %}" alt="prescriptions" />
+                    </div>
+                    <div class="two_text">
+                        <p class="two_parts_title">Prescriptions</p>
+                        <p class="description">
+                            Surgeries online supports prescriptions. It allows patient to access to their prescrption details.
+                            Allow you pahrmacy to manage prescriptions, update availability and recieve payment from patients online
+                            when applicable. This functionality is also free
+                        </p>
+                    </div>
+                </div>
+                <div class="two_content">
+                    <div class="two_image">
+                        <img src= "{% static "img/referral.png" %}" alt="referrals" />
+                    </div>
+                    <div class="two_text">
+                        <p class="two_parts_title">Referrals</p>
+                        <p class="description">The System also supports referrals of patients to hospitals or other specialized facilities.
+                           The hospitals or medical facility of referral must be also registered with the system. Patient also have access to
+                            referral details.
+                            </p>
+                    </div>
+                </div>
+                <div class="two_content">
+                    <div class="two_image">
+                        <img src="{% static "img/history.jpg" %}" alt="ealth history" />
+                    </div>
+                    <div class="two_text">
+                        <p class="two_parts_title">History </p>
+                        <p class="description">
+                            The system keeps track of light medical histories of patients by aggregating details of appointments,
+                            prescription and referrals over time. This history are availale to patients, doctors and nurses during
+                            consultations. The system also supports generating reports from such histories.
+                        </p>
+                    </div>
+                </div>
+                <div class="two_content">
+                    <div class="two_image">
+                        <img src="{% static "img/transfer.png" %}" alt="health history transfer" />
+                    </div>
+                    <div class="two_text">
+                        <p class="two_parts_title">Supports transfer </p>
+                        <p class="description">
+                            Surgeries Online provides support for transfer of patients data and access from one surgery to another where both
+                            surgeries are users of surgeries online. Such tranfers may be necessary due to reasons like relocation.
+                        </p>
+                    </div>
+                </div>
+         {% endblock %}
+
+
+        {% block two_buttom %}
+            <div id="two_bottom" >
+                <p class="two_parts_title">Surgeries online</p>
+                <p class="description">
+                    Surgeries online offers all this services and more to clients .i.e. surgeries and GPs. We also prioritise proper
+                    access control measures and security in implementing this system.
+                    Register you surgery with Surgeries Online and get a reliable online service for your staff and patients
+                </p>
+            </div>
+        {% endblock %}
+    {% endblock %}
+	</div>
+    </div>
+
+{% endblock %}

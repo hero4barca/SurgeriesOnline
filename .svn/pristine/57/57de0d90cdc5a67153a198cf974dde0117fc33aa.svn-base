@@ -1,0 +1,59 @@
+{% extends 'userPage.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Surgerie's patients
+ {% endblock %}
+
+{% block userContent %}
+
+    <h4 >  Transfer  request details</h4> <hr/>
+
+    <div id="tarnsfer_details">
+
+
+       <p>  patient Name: {{ transfer.patient.get_name }}<br/>
+        request date: {{ transfer.requestDate }}<br/>
+        approval status:
+        {% if  transfer.approve == Null  %}
+            {% if transfer.toSurgery.pk == request.session.surgeryId %}
+                <a href="/admin/accept_patient_transfer_request/{{ transfer.pk }}/">accept</a>  | <a href="/admin/decline_patient_transfer_request/{{ transfer.pk }}/">decline</a>
+            {% else %}
+                    Not yet assessed
+            {% endif %}
+        {% elif transfer.approve == False %}
+                    Declined| <a href="">please delete</a>
+
+        {% elif transfer.approve == True %}
+                    Approved on {{ transfer.approvalDate }}
+        {% endif %}
+
+        <br/>
+        approval date: {{ transfer.approvalDate }}
+
+    </p>
+
+    <p>
+        patient username: {{ requestUser.username }}<br/>
+        Patient email: {{ requestUser.email }}
+    </p>
+    <p>
+        patient NHS No: {{ transfer.patient.NHS_No }}<br/>
+        patient address: {{ transfer.patient.address }}<br/>
+        patient contact no: {{ transfer.patient.phoneNo }}<br/>
+
+    </p>
+    {% if transfer.toSurgery.pk == request.session.surgeryId  %}
+        <p>
+        Transfer:
+        {% if transfer.approve == True %}
+             <a href="/admin/transfer_patient/{{ transfer.pk }}/"> make transfer </a>
+            {% else %}
+            not approved
+        {%  endif%}
+        </p>
+    {% endif %}
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ block.super}}
+    :Homepage
+ {% endblock %}
+
+{% block midpage %}
+    <div id="three_part">
+        <div id="three_content">
+                <div class="text_box">
+                    <p class="title">Register Surgery</p>
+                    <p class="description">Register your surgery with Surgeries Online to access ours online portals and use our services  which
+                        includes patient appointment and bookings, history management, prescription managment etc. There are also accounts for
+                     staff and patients</p>
+                    <a href="/register/register_surgery/"><img src="{% static "img/button2.png" %}" class="read_more" alt="Read more" /></a>
+                </div>
+                <div class="text_box">
+                    <p class="title">Register Hospital</p>
+                    <p class="description">Register your hospital with Surgeries online to access our online portals for hospitals. We allow your
+                        hospital to receive and manage patient referrals from various surgeries. Monitor an keep track of new referrals, fix referral
+                        appointment etc </p>
+
+                    <a href="/register/hospital/"><img src="{% static "img/button2.png" %}" class="read_more" alt="Read more" /></a>
+                </div>
+                <div class="text_box">
+                    <p class="title">New patients' Sign-up </p>
+                    <p class="description"> For new patients registeration. Patient's surgery must be a registerd surgery that uses Surgeries Online.
+                       You can book appointments with doctors and nurses, access you prescriptions, view your referrals, patients history over time etc  </p>
+
+                    <a href="/register/register_patient/"><img src="{% static "img/button2.png" %}" class="read_more" alt="Read more" /></a>
+                </div>
+        </div>
+    </div>
+    {% block content %}
+    <div id="content">
+        <div id="first_content">
+            {% block left_content%}
+            <div id="left_content">
+                <p class="title">Welcome to Surgeries Online </p>
+                <p class="description"> An automated software for local surgeries </p>
+                <p class="description">
+                    The Surgeries Online is a project which focuses on health care delivery aiming to ease,
+                    enhance and further automate interactions between the major actors especially focusing on the patients.
+                    Surgeries and hospitals can register with the system while various user types are associated with a surgery.
+                    The system then provides functionalities which support various actions an interactions between users associated
+                    with a given surgery e.g. booking/managing of appointments with nurses and doctors, making and management of prescriptions etc
+                     </p>
+
+                <p class="title">Improved services  for patients</p>
+                <p class="description">
+                    We aim to improve services for patients by enabling direct access to services provided by their surgeries. This includes booking and managing of
+                    appointments with doctors and nurses, accessing and onlinle payment for prescriptions, managing of referrals etc.
+                    Patients also has access to their history (appointments, prescriptions and referrals over time)
+                     </p>
+                <p class="description"> We also support patient transfer form one surgery to another for patients that may change surgery for any personal reasons. Patients
+                 can also print a report containing such histories</p>
+
+
+                <p class="title">Imroved services by surgeries </p>
+                <p class="description">We aim to improve on the services offered by surgeries to their patients. By enabling easier access
+                 to services by and improving the interaction between patients and hospital staff.  </p>
+            </div>
+                {% endblock %}
+            {% block right_content %}
+            <div id="right_content">
+                <p class="red_title"> Appointing booking</p>
+                <p class="description">Supports booking and canceling of doctor/nurse appointments by patients</p>
+
+                <p class="red_title">Prescriptions</p>
+                <p class="description">Supports prescriptions and prescription management</p>
+                <p class="red_title">Medical appointments history</p>
+                <p class="description">Maintains a secure track of patient history over time combining appointment, prescription and referral to generate some kind of history</p>
+
+                <p class="red_title">Card payment</p>
+                <p class="description">Support card payment for prescriptions</p>
+
+
+            </div>
+                {% endblock %}
+        </div>
+    </div>
+        {% endblock %}
+
+{% endblock %}
